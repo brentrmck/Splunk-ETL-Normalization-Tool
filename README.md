@@ -37,10 +37,12 @@ A five-stage pipeline: **load → normalize → deduplicate → validate → emi
 Two incoming events that are actually the same occurrence, in two different shapes:
 
  **Input JSON:** 
+
 {"timestamp": "2024-01-15T14:23:45Z", "level": "ERROR", "service": "auth-api", "message": "User login failed", "user_id": 12345}
 {"ts": "01/15/2024 14:23:45", "severity": "error", "source": "auth-api", "msg": "User login failed", "userid": 12345}
 
-**Output Normalized Event**
+**Output Normalized Event:**
+
 {"timestamp": "2024-01-15T14:23:45Z", "level": "ERROR", "service": "auth-api", "message": "User login failed", "user_id": 12345}
 
 ## Design principles
