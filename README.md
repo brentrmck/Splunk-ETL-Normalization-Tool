@@ -53,3 +53,11 @@ Daily batch runs of 50K–200K events with a 5m budget
 Failures are visible. Bad lines are reported, counted, and summarized so that nothing fails silently.
 Unrecognized fields are still passed through instead of being discarded.
 Tool-agnostic output. Built with Splunk in mind, yet outputs plain JSON Lines that any consumer can read.
+
+## Status
+Fault-tolerant JSONL loader with parse/failure reporting - Complete
+Field and timestamp normalization
+Level normalization
+Deduplication
+Validation and run summary
+Output writer
