@@ -56,8 +56,12 @@ Tool-agnostic output. Built with Splunk in mind, yet outputs plain JSON Lines th
 
 ## Status
 Fault-tolerant JSONL loader with parse/failure reporting - Complete
+
 Field and timestamp normalization
+
 Level normalization
+
 Deduplication
+
 Validation and run summary
 Output writer
