@@ -16,8 +16,8 @@ ingestion is slow and error-prone, this tool automates the process.
 
 A five-stage pipeline: **load → normalize → deduplicate → validate → emit**
 
-- Parses JSON object input and survives bad data — malformed lines are counted
-  and reported with line numbers, never fatal to the run
+- Parses JSON object input and allows bad data. Malformed lines are counted
+  and reported with line numbers.
 - Maps field aliases onto one schema (`ts`/`ts_ms` → `timestamp`,
   `severity` → `level`, `app`/`source` → `service`, `msg` → `message`,
   `userid` → `user_id`)
