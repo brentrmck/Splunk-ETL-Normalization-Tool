@@ -64,4 +64,5 @@ Level normalization
 Deduplication
 
 Validation and run summary
+
 Output writer
