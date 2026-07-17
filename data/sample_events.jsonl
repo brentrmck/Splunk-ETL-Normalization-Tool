@@ -3,3 +3,5 @@
 {"timestamp": "2024-01-15 14:23:47", "level": "error", "app": "auth-api", "message": "User login failed", "userid": 12346}
 {"timestamp": "2024-01-15T14:23:48Z", "level": "ERROR", "service": "auth-api", "message": ""}
 {"ts_ms": 1705330928000, "level": "WARN", "service": "payment-svc", "message": "Connection timeout", "region": "us-east-1", "request_id": "a1b2c3"}
+{"ts_ms": 1705330928000, "level": "WARN", "service": "payment-svc", "message": "Connection timeout", "region": "us-east-1", "request_id": "a1b2c3"
+{"ts_ms": 1705330928001, "level": "WARN", "service": "payment-svc", "message": "Connection timeout", "region": "us-west-1", "request_id": "a1b434"}
