@@ -16,15 +16,15 @@ ingestion is slow and error-prone, this tool automates the process.
 
 A five-stage pipeline: **load → normalize → deduplicate → validate → emit**
 
-- Parses JSON object input and allows bad data. Malformed lines are counted
+- Parses JSON object input and survives bad data. Malformed lines are counted
   and reported with line numbers.
 - Required fields:
   - timestamp
   - log_level
   - service
   - message
-- Maps field aliases onto one schema (`ts`/`ts_ms` → `timestamp`,
-  `severity` → `log_level`, `app`/`source` → `service`, `msg` → `message`)
+- Maps field aliases onto one schema (`ts`/`ts_ms`/`time` → `timestamp`,
+  `severity`/`level` → `log_level`, `app`/`source` → `service`, `msg` → `message`)
 - Normalizes timestamps to ISO 8601 UTC, whether they arrive as ISO strings,
   US-style dates, or epoch milliseconds (timestamps without a timezone are
   assumed UTC)
