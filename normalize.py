@@ -14,4 +14,7 @@ def load_events(jsonl_path):
         print(f"parsed: {parsed_count} failed: {failed_count}")
     return events
 
+def normalize_event():
+    pass
+
 print(load_events("data/sample_events.jsonl"))
