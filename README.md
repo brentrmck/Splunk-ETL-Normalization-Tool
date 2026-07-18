@@ -18,9 +18,13 @@ A five-stage pipeline: **load → normalize → deduplicate → validate → emi
 
 - Parses JSON object input and allows bad data. Malformed lines are counted
   and reported with line numbers.
+- Required fields:
+  - timestamp
+  - log_level
+  - service
+  - message
 - Maps field aliases onto one schema (`ts`/`ts_ms` → `timestamp`,
-  `severity` → `log_level`, `app`/`source` → `service`, `msg` → `message`,
-  `userid` → `user_id`)
+  `severity` → `log_level`, `app`/`source` → `service`, `msg` → `message`)
 - Normalizes timestamps to ISO 8601 UTC, whether they arrive as ISO strings,
   US-style dates, or epoch milliseconds (timestamps without a timezone are
   assumed UTC)
