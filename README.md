@@ -23,8 +23,11 @@ A five-stage pipeline: **load → normalize → deduplicate → validate → emi
   - log_level
   - service
   - message
+- Optional fields:
+  - user_id
+  - extras
 - Maps field aliases onto one schema (`ts`/`ts_ms`/`time` → `timestamp`,
-  `severity`/`level` → `log_level`, `app`/`source` → `service`, `msg` → `message`)
+  `severity`/`level` → `log_level`, `app`/`source` → `service`, `msg` → `message`, `userid` → `user_id`)
 - Normalizes timestamps to ISO 8601 UTC, whether they arrive as ISO strings,
   US-style dates, or epoch milliseconds (timestamps without a timezone are
   assumed UTC)
@@ -32,7 +35,7 @@ A five-stage pipeline: **load → normalize → deduplicate → validate → emi
 - Deduplicates events that describe the same occurrence, even when the two
   copies use different field names and timestamp formats
 - Never throws data away: fields that don't map to the schema are preserved
-  on the event, not dropped
+  under 'extras' rather than at the top level of the event, they are not dropped
 - Writes clean JSON Lines to `output/`, ready for Splunk (or anything else)
   to ingest
 
@@ -48,15 +51,14 @@ Two incoming events that are actually the same occurrence, in two different shap
 
 **Output Normalized Event:**
 
-{"timestamp": "2024-01-15T14:23:45Z", "log_level": "ERROR", "service": "auth-api", "message": "User login failed", "user_id": 12345}
+{"timestamp": "2024-01-15T14:23:45Z", "log_level": "ERROR", "service": "auth-api", "message": "User login failed", "user_id": 12345, "extras": {}}
 
 ## Design principles
-Correctness over speed. 
-
-Daily batch runs of 50K–200K events with a 5m budget
-Failures are visible. Bad lines are reported, counted, and summarized so that nothing fails silently.
-Unrecognized fields are still passed through instead of being discarded.
-Tool-agnostic output. Built with Splunk in mind, yet outputs plain JSON Lines that any consumer can read.
+- Correctness over speed. 
+- Daily batch runs of 50K–200K events with a 5m budget
+- Failures are visible. Bad lines are reported, counted, and summarized so that nothing fails silently.
+- Unrecognized fields are still passed through instead of being discarded.
+- Tool-agnostic output. Built with Splunk in mind, yet outputs plain JSON Lines that any consumer can read.
 
 ## Status
 Fault-tolerant JSONL loader with parse/failure reporting - **Complete**
