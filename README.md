@@ -19,12 +19,12 @@ A five-stage pipeline: **load → normalize → deduplicate → validate → emi
 - Parses JSON object input and allows bad data. Malformed lines are counted
   and reported with line numbers.
 - Maps field aliases onto one schema (`ts`/`ts_ms` → `timestamp`,
-  `severity` → `level`, `app`/`source` → `service`, `msg` → `message`,
+  `severity` → `log_level`, `app`/`source` → `service`, `msg` → `message`,
   `userid` → `user_id`)
 - Normalizes timestamps to ISO 8601 UTC, whether they arrive as ISO strings,
   US-style dates, or epoch milliseconds (timestamps without a timezone are
   assumed UTC)
-- Normalizes log levels to `ERROR` / `WARN` / `INFO` / `DEBUG`
+- Normalizes log_level to `ERROR` / `WARN` / `INFO` / `DEBUG`
 - Deduplicates events that describe the same occurrence, even when the two
   copies use different field names and timestamp formats
 - Never throws data away: fields that don't map to the schema are preserved
@@ -44,7 +44,7 @@ Two incoming events that are actually the same occurrence, in two different shap
 
 **Output Normalized Event:**
 
-{"timestamp": "2024-01-15T14:23:45Z", "level": "ERROR", "service": "auth-api", "message": "User login failed", "user_id": 12345}
+{"timestamp": "2024-01-15T14:23:45Z", "log_level": "ERROR", "service": "auth-api", "message": "User login failed", "user_id": 12345}
 
 ## Design principles
 Correctness over speed. 
