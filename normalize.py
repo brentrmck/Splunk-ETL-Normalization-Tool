@@ -1,5 +1,16 @@
 import json
 
+alias_table = {"ts":"timestamp",
+"ts_ms":"timestamp",
+"time":"timestamp",
+"severity":"log_level",
+"level":"log_level",
+"app":"service",
+"source":"service",
+"msg":"message",
+"userid":"user_id"
+}
+
 def load_events(jsonl_path):
     with open(jsonl_path) as file:
         events = []
@@ -14,7 +25,17 @@ def load_events(jsonl_path):
         print(f"parsed: {parsed_count} failed: {failed_count}")
     return events
 
-def normalize_event():
-    pass
+def normalize_event(raw_event):
+    normalized_event = {}
+    for key in raw_event:
+        pass
+        # if alias required:
+        #    update to alias
+        # elif already good:
+        #    add directly
+        # else:
+        #    add to extras{} bag
+    return normalized_event
 
-print(load_events("data/sample_events.jsonl"))
+#print(load_events("data/sample_events.jsonl"))
+
