@@ -35,7 +35,7 @@ def load_events(jsonl_path):
 
 def normalize_event(raw_event):
     normalized_event = {}
-    normalized_event["extras"]={}
+    normalized_event["extras"] = {}
     for key in raw_event:
         pass
         # if alias required:
