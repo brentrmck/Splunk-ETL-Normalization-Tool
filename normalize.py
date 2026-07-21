@@ -11,6 +11,14 @@ alias_table = {"ts":"timestamp",
 "userid":"user_id"
 }
 
+normalized_field_names = [
+    "timestamp",
+    "log_level",
+    "service",
+    "message",
+    "user_id"
+]
+
 def load_events(jsonl_path):
     with open(jsonl_path) as file:
         events = []
