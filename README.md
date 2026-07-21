@@ -63,9 +63,11 @@ Two incoming events that are actually the same occurrence, in two different shap
 ## Status
 Fault-tolerant JSONL loader with parse/failure reporting - **Complete**
 
-Field and timestamp normalization
+Field name normalization - **Complete**
 
-Level normalization
+Level value normalization
+
+Timestamp value normalization
 
 Deduplication
 

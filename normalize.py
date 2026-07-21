@@ -36,15 +36,14 @@ def load_events(jsonl_path):
 def normalize_event(raw_event):
     normalized_event = {}
     normalized_event["extras"] = {}
-    for key in raw_event:
-        pass
-        # if alias required:
-        #    update to alias
-        # elif already good:
-        #    add directly
-        # else:
-        #    add to extras{} bag
+    for key, value in raw_event.items():
+        if key in alias_table:
+            normalized_event[alias_table[key]] =  value
+        elif key in normalized_field_names:
+            normalized_event[key] = value
+        else:
+            normalized_event["extras"].update({key: value})
     return normalized_event
 
-#print(load_events("data/sample_events.jsonl"))
-
+for raw in load_events("data/sample_events.jsonl"):
+    print(normalize_event(raw))
