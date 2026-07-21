@@ -1,14 +1,14 @@
 import json
 
 alias_table = {"ts":"timestamp",
-"ts_ms":"timestamp",
-"time":"timestamp",
-"severity":"log_level",
-"level":"log_level",
-"app":"service",
-"source":"service",
-"msg":"message",
-"userid":"user_id"
+    "ts_ms":"timestamp",
+    "time":"timestamp",
+    "severity":"log_level",
+    "level":"log_level",
+    "app":"service",
+    "source":"service",
+    "msg":"message",
+    "userid":"user_id"
 }
 
 normalized_field_names = [
