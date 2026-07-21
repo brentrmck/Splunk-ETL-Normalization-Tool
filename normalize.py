@@ -42,7 +42,7 @@ def normalize_event(raw_event):
         elif key in normalized_field_names:
             normalized_event[key] = value
         else:
-            normalized_event["extras"].update({key: value})
+            normalized_event["extras"][key] = [value]
     return normalized_event
 
 for raw in load_events("data/sample_events.jsonl"):
