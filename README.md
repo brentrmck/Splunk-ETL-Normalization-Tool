@@ -67,7 +67,7 @@ Field name normalization - **Complete**
 
 JSON Order structure (timestamp first ... extras last) - **Complete**
 
-Level value normalization
+Level value normalization - **Complete**
 
 Timestamp value normalization
 

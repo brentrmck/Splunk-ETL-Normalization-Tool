@@ -44,12 +44,13 @@ def normalize_event(raw_event):
             normalized_event[key] = value
         else:
             normalized_event["extras"][key] = value
-
     normalized_event_ordered = {}
     for field in normalized_field_names:
         if field in normalized_event:
             normalized_event_ordered[field] = normalized_event[field]
     normalized_event_ordered["extras"] = normalized_event["extras"]
+    if "log_level" in normalized_event_ordered:
+        normalized_event_ordered["log_level"] = str(normalized_event_ordered["log_level"]).upper()
     return normalized_event_ordered
 
 if __name__ == "__main__":
