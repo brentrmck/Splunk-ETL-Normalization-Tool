@@ -38,7 +38,7 @@ def normalize_event(raw_event):
     normalized_event["extras"] = {}
     for key, value in raw_event.items():
         if key in alias_table:
-            normalized_event[alias_table[key]] =  value
+            normalized_event[alias_table[key]] = value
         elif key in normalized_field_names:
             normalized_event[key] = value
         else:
