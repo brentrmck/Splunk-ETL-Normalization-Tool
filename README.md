@@ -1,4 +1,4 @@
-hi # Splunk ETL Normalization Tool
+# Splunk ETL Normalization Tool
 
 A Python batch utility that takes messy JSON objects from different sources and
 turns them into clean, deduplicated, JSON log entries.
