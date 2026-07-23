@@ -1,6 +1,7 @@
 import json
 
-alias_table = {"ts":"timestamp",
+alias_table = {
+    "ts":"timestamp",
     "ts_ms":"timestamp",
     "time":"timestamp",
     "severity":"log_level",
@@ -51,5 +52,6 @@ def normalize_event(raw_event):
     normalized_event_ordered["extras"] = normalized_event["extras"]
     return normalized_event_ordered
 
-for raw in load_events("data/sample_events.jsonl"):
-    print(normalize_event(raw))
+if __name__ == "__main__":
+    for raw in load_events("data/sample_events.jsonl"):
+        print(normalize_event(raw))
