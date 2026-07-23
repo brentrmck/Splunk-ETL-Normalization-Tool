@@ -45,13 +45,13 @@ Two incoming events that are actually the same occurrence, in two different shap
 
  **Input JSON Objects:** 
 
-{"timestamp": "2024-01-15T14:23:45Z", "level": "ERROR", "service": "auth-api", "message": "User login failed", "user_id": 12345}
+{"timestamp": "2024-01-15T14:23:45Z", "level": "ERROR", "service": "auth-api", "message": "User login failed", "user_id": 12345, "region": "us-east-1"}
 
-{"ts": "01/15/2024 14:23:45", "severity": "error", "source": "auth-api", "msg": "User login failed", "userid": 12345}
+{"ts": "01/15/2024 14:23:45", "severity": "error", "source": "auth-api", "msg": "User login failed", "userid": 12345, "region": "us-east-1"}
 
 **Output Normalized Event:**
 
-{"timestamp": "2024-01-15T14:23:45Z", "log_level": "ERROR", "service": "auth-api", "message": "User login failed", "user_id": 12345, "extras": {}}
+{"timestamp": "2024-01-15T14:23:45Z", "log_level": "ERROR", "service": "auth-api", "message": "User login failed", "user_id": 12345, 'extras': {'region': 'us-east-1'}}
 
 ## Design principles
 - Correctness over speed. 
@@ -64,6 +64,8 @@ Two incoming events that are actually the same occurrence, in two different shap
 Fault-tolerant JSONL loader with parse/failure reporting - **Complete**
 
 Field name normalization - **Complete**
+
+JSON Order structure (timestamp first ... extras last) - **Complete**
 
 Level value normalization
 

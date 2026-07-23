@@ -43,8 +43,13 @@ def normalize_event(raw_event):
             normalized_event[key] = value
         else:
             normalized_event["extras"][key] = value
-    normalized_event["extras"] = normalized_event.pop("extras")
-    return normalized_event
+
+    normalized_event_ordered = {}
+    for field in normalized_field_names:
+        if field in normalized_event:
+            normalized_event_ordered[field] = normalized_event[field]
+    normalized_event_ordered["extras"] = normalized_event["extras"]
+    return normalized_event_ordered
 
 for raw in load_events("data/sample_events.jsonl"):
     print(normalize_event(raw))
