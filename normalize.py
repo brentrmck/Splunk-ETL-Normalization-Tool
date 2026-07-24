@@ -1,4 +1,5 @@
 import json
+from datetime import datetime, timezone
 
 alias_table = {
     "ts":"timestamp",
@@ -19,6 +20,14 @@ normalized_field_names = [
     "message",
     "user_id"
 ]
+
+timestamp_formats = [
+    "%Y-%m-%dT%H:%M:%SZ",
+    "%Y-%m-%d %H:%M:%S",
+    "%m/%d/%Y %H:%M:%S",
+]
+
+output_timestamp_format = "%Y-%m-%dT%H:%M:%SZ"
 
 def load_events(jsonl_path):
     with open(jsonl_path) as file:
@@ -52,6 +61,21 @@ def normalize_event(raw_event):
     if "log_level" in normalized_event_ordered:
         normalized_event_ordered["log_level"] = str(normalized_event_ordered["log_level"]).upper()
     return normalized_event_ordered
+
+def normalize_timestamp(timestamp):
+    if isinstance(timestamp, (int, float)):
+        seconds = int(timestamp) / 1000
+        parsed_timestamp = datetime.fromtimestamp(seconds, tz=timezone.utc)
+        formatted_timestamp = parsed_timestamp.strftime(output_timestamp_format)
+        return formatted_timestamp
+    else:
+        for ts_format in timestamp_formats:
+            try:
+                parsed_timestamp = datetime.strptime(timestamp, ts_format)
+                formatted_timestamp = parsed_timestamp.strftime(output_timestamp_format)
+                return formatted_timestamp
+            except ValueError:
+                pass
 
 if __name__ == "__main__":
     for raw in load_events("data/sample_events.jsonl"):
