@@ -44,8 +44,7 @@ def load_events(jsonl_path):
     return events
 
 def normalize_event(raw_event):
-    normalized_event = {}
-    normalized_event["extras"] = {}
+    normalized_event = {"extras":{}}
     for key, value in raw_event.items():
         if key in alias_table:
             normalized_event[alias_table[key]] = value
