@@ -31,6 +31,8 @@ A five-stage pipeline: **load → normalize → deduplicate → validate → emi
 - Normalizes timestamps to ISO 8601 UTC, whether they arrive as ISO strings,
   US-style dates, or epoch milliseconds (timestamps without a timezone are
   assumed UTC)
+- All timestamps will have 3 digit milliseconds. Timestamps without milliseconds 
+  will be padded with .000.
 - Normalizes log_level to `ERROR` / `WARN` / `INFO` / `DEBUG`
 - Deduplicates events that describe the same occurrence, even when the two
   copies use different field names and timestamp formats
@@ -51,7 +53,7 @@ Two incoming events that are actually the same occurrence, in two different shap
 
 **Output Normalized Event:**
 
-{"timestamp": "2024-01-15T14:23:45Z", "log_level": "ERROR", "service": "auth-api", "message": "User login failed", "user_id": 12345, 'extras': {'region': 'us-east-1'}}
+{"timestamp": "2024-01-15T14:23:45.000Z", "log_level": "ERROR", "service": "auth-api", "message": "User login failed", "user_id": 12345, "extras": {"region": "us-east-1"}}
 
 ## Design principles
 - Correctness over speed. 
