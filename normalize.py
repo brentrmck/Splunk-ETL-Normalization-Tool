@@ -77,9 +77,8 @@ def normalize_timestamp(timestamp):
                 pass
     if parsed_timestamp is None:
         return timestamp
-    else:
-        formatted_timestamp = parsed_timestamp.strftime(output_timestamp_format)
-        formatted_timestamp = formatted_timestamp[:-4] + "Z"
+    formatted_timestamp = parsed_timestamp.strftime(output_timestamp_format)
+    formatted_timestamp = formatted_timestamp[:-4] + "Z"
     return formatted_timestamp
 
 if __name__ == "__main__":
