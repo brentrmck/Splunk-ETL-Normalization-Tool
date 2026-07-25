@@ -71,7 +71,7 @@ JSON Order structure (timestamp first ... extras last) - **Complete**
 
 Level value normalization - **Complete**
 
-Timestamp value normalization - **In Progress**
+Timestamp value normalization - **Complete**
 
 Deduplication
 
