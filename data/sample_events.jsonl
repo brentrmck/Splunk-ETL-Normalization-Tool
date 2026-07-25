@@ -7,3 +7,5 @@
 {"ts_ms": 1705330928001, "level": "WARN", "service": "payment-svc", "message": "Connection timeout", "region": "us-west-1", "request_id": "a1b434"}
 {"ts_ms": 1705330928212, "service": "payment-svc", "message": "Connection timeout", "region": "us-west-1", "request_id": "qwe213"}
 {"ts_ms": 1705330943332, "level": 3, "service": "payment-svc", "message": "Connection timeout", "region": "us-west-1", "request_id": "qwe443"}
+{"ts_ms": "yesterday-ish", "level": 3, "service": "payment-svc", "message": "Connection timeout", "region": "us-west-1", "request_id": "qwe443"}
+  
