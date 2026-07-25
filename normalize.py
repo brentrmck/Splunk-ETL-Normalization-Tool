@@ -27,7 +27,7 @@ timestamp_formats = [
     "%m/%d/%Y %H:%M:%S",
 ]
 
-output_timestamp_format = "%Y-%m-%dT%H:%M:%SZ"
+output_timestamp_format = "%Y-%m-%dT%H:%M:%S.%fZ"
 
 def load_events(jsonl_path):
     with open(jsonl_path) as file:
@@ -64,19 +64,23 @@ def normalize_event(raw_event):
     return normalized_event_ordered
 
 def normalize_timestamp(timestamp):
+    parsed_timestamp = None
     if isinstance(timestamp, (int, float)):
         seconds = int(timestamp) / 1000
         parsed_timestamp = datetime.fromtimestamp(seconds, tz=timezone.utc)
-        formatted_timestamp = parsed_timestamp.strftime(output_timestamp_format)
-        return formatted_timestamp
     else:
         for ts_format in timestamp_formats:
             try:
                 parsed_timestamp = datetime.strptime(timestamp, ts_format)
-                formatted_timestamp = parsed_timestamp.strftime(output_timestamp_format)
-                return formatted_timestamp
+                break
             except ValueError:
                 pass
+    if parsed_timestamp is None:
+        return timestamp
+    else:
+        formatted_timestamp = parsed_timestamp.strftime(output_timestamp_format)
+        formatted_timestamp = formatted_timestamp[:-4] + "Z"
+    return formatted_timestamp
 
 if __name__ == "__main__":
     for raw in load_events("data/sample_events.jsonl"):
