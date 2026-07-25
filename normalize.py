@@ -59,6 +59,8 @@ def normalize_event(raw_event):
     normalized_event_ordered["extras"] = normalized_event["extras"]
     if "log_level" in normalized_event_ordered:
         normalized_event_ordered["log_level"] = str(normalized_event_ordered["log_level"]).upper()
+    if "timestamp" in normalized_event_ordered:
+        normalized_event_ordered["timestamp"] = normalize_timestamp(normalized_event_ordered["timestamp"])
     return normalized_event_ordered
 
 def normalize_timestamp(timestamp):
