@@ -81,6 +81,26 @@ def normalize_timestamp(timestamp):
     formatted_timestamp = formatted_timestamp[:-4] + "Z"
     return formatted_timestamp
 
+def dedupe_events(normalized_events):
+    seen_fingerprints = set()
+    deduped_events = []
+    duplicate_count = 0
+
+    for event in normalized_events:
+        fingerprint = json.dumps(event, sort_keys=True)
+        if fingerprint not in seen_fingerprints:
+            seen_fingerprints.add(fingerprint)
+            deduped_events.append(event)
+        else:
+            duplicate_count += 1
+    print(f"duplicates removed: {duplicate_count}")
+    return deduped_events
+
 if __name__ == "__main__":
+    normalized_events = []
+    deduped_events = []
     for raw in load_events("data/sample_events.jsonl"):
-        print(normalize_event(raw))
+        normalized_events.append(normalize_event(raw))
+    deduped_events = dedupe_events(normalized_events)
+    for event in deduped_events:
+        print(event)
