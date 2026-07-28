@@ -34,7 +34,7 @@ A five-stage pipeline: **load → normalize → deduplicate → validate → emi
 - All timestamps will have 3 digit milliseconds. Timestamps without milliseconds 
   will be padded with .000.
 - Normalizes log_level to `ERROR` / `WARN` / `INFO` / `DEBUG`
-- Deduplicates are events identical in every field after normalization, extras included
+- Deduplicates events that are identical in every field after normalization, extras included.
 - Never throws data away: fields that don't map to the schema are preserved
   under 'extras' rather than at the top level of the event, they are not dropped
 - Writes clean JSON Lines to `output/`, ready for Splunk (or anything else)
@@ -72,7 +72,7 @@ Level value normalization - **Complete**
 
 Timestamp value normalization - **Complete**
 
-Deduplication
+Deduplication - **Complete**
 
 Validation and run summary
 
