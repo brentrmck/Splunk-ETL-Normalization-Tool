@@ -115,6 +115,9 @@ def validate_events(normalized_event):
     for field in required_field_names:
         if field not in normalized_event:
             validation_errors.append(f'Missing required field: {field}')
+    if "log_level" in normalized_event:
+        if normalized_event['log_level'] not in normalized_level_values:
+            validation_errors.append(f'log_level has invalid value:{normalized_event["log_level"]}')
     return normalized_event
 
 if __name__ == "__main__":
