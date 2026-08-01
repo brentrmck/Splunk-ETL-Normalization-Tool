@@ -13,12 +13,26 @@ alias_table = {
     "userid":"user_id"
 }
 
+required_field_names = [
+    "timestamp",
+    "log_level",
+    "service",
+    "message"
+]
+
 normalized_field_names = [
     "timestamp",
     "log_level",
     "service",
     "message",
     "user_id"
+]
+
+normalized_level_values = [
+    "ERROR",
+    "WARN",
+    "INFO",
+    "DEBUG"
 ]
 
 timestamp_formats = [
@@ -96,6 +110,13 @@ def dedupe_events(normalized_events):
     print(f"duplicates removed: {duplicate_count}")
     return deduped_events
 
+def validate_events(normalized_event):
+    validation_errors = []
+    for field in required_field_names:
+        if field not in normalized_event:
+            validation_errors.append(f'Missing required field: {field}')
+    return normalized_event
+
 if __name__ == "__main__":
     normalized_events = []
     deduped_events = []
@@ -103,4 +124,5 @@ if __name__ == "__main__":
         normalized_events.append(normalize_event(raw))
     deduped_events = dedupe_events(normalized_events)
     for event in deduped_events:
+        validate_events(event)
         print(event)
