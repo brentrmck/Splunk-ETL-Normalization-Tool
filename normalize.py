@@ -133,7 +133,13 @@ if __name__ == "__main__":
     for raw in load_events("data/sample_events.jsonl"):
         normalized_events.append(normalize_event(raw))
     deduped_events = dedupe_events(normalized_events)
+    invalid_count = 0
     for event in deduped_events:
-        validated_events.append(validate_event(event))
+        validated_event = validate_event(event)
+        if "validation_errors" in validated_event:
+            invalid_count += 1
+        validated_events.append(validated_event)
+    print(f"events with validation errors: {invalid_count}")
     for event in validated_events:
         print(event)
+        

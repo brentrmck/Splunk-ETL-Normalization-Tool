@@ -26,6 +26,7 @@ A five-stage pipeline: **load → normalize → deduplicate → validate → emi
 - Optional fields:
   - user_id
   - extras
+  - validation_errors (present only when an event fails validation)
 - Maps field aliases onto one schema (`ts`/`ts_ms`/`time` → `timestamp`,
   `severity`/`level` → `log_level`, `app`/`source` → `service`, `msg` → `message`, `userid` → `user_id`)
 - Normalizes timestamps to ISO 8601 UTC, whether they arrive as ISO strings,
@@ -35,6 +36,10 @@ A five-stage pipeline: **load → normalize → deduplicate → validate → emi
   will be padded with .000.
 - Normalizes log_level to `ERROR` / `WARN` / `INFO` / `DEBUG`
 - Deduplicates events that are identical in every field after normalization, extras included.
+- Invalid events are kept in the output stream and flagged with a `validation_errors`
+  field listing each specific failure, rather than being dropped or routed to a
+  separate file. Nothing is lost, failures are searchable, and consumers decide
+  their own strictness.
 - Never throws data away: fields that don't map to the schema are preserved
   under 'extras' rather than at the top level of the event, they are not dropped
 - Writes clean JSON Lines to `output/`, ready for Splunk (or anything else)
