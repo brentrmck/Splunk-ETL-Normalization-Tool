@@ -74,6 +74,6 @@ Timestamp value normalization - **Complete**
 
 Deduplication - **Complete**
 
-Validation and run summary - **In Progress**
+Validation and run summary - **Complete**
 
 Output writer

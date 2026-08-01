@@ -118,16 +118,22 @@ def validate_event(normalized_event):
     if "log_level" in normalized_event:
         if normalized_event['log_level'] not in normalized_level_values:
             validation_errors.append(f'log_level has invalid value: {normalized_event["log_level"]}')
+    if "timestamp" in normalized_event:
+        try:
+            datetime.strptime(normalized_event['timestamp'], output_timestamp_format)
+        except ValueError:
+            validation_errors.append(f'Timestamp invalid: {normalized_event["timestamp"]}')
     if validation_errors:
         normalized_event["validation_errors"] = validation_errors
     return normalized_event
 
 if __name__ == "__main__":
     normalized_events = []
-    deduped_events = []
+    validated_events = []
     for raw in load_events("data/sample_events.jsonl"):
         normalized_events.append(normalize_event(raw))
     deduped_events = dedupe_events(normalized_events)
     for event in deduped_events:
-        validate_event(event)
+        validated_events.append(validate_event(event))
+    for event in validated_events:
         print(event)
