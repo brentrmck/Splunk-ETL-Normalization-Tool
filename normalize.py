@@ -110,14 +110,16 @@ def dedupe_events(normalized_events):
     print(f"duplicates removed: {duplicate_count}")
     return deduped_events
 
-def validate_events(normalized_event):
+def validate_event(normalized_event):
     validation_errors = []
     for field in required_field_names:
         if field not in normalized_event:
             validation_errors.append(f'Missing required field: {field}')
     if "log_level" in normalized_event:
         if normalized_event['log_level'] not in normalized_level_values:
-            validation_errors.append(f'log_level has invalid value:{normalized_event["log_level"]}')
+            validation_errors.append(f'log_level has invalid value: {normalized_event["log_level"]}')
+    if validation_errors:
+        normalized_event["validation_errors"] = validation_errors
     return normalized_event
 
 if __name__ == "__main__":
@@ -127,5 +129,5 @@ if __name__ == "__main__":
         normalized_events.append(normalize_event(raw))
     deduped_events = dedupe_events(normalized_events)
     for event in deduped_events:
-        validate_events(event)
+        validate_event(event)
         print(event)
